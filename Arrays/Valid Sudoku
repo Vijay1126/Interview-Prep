@@ -1,0 +1,29 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        #The key here is to know how to calculate board index
+        #BoardIndex = row//3 times 3 + colums //3
+        
+        
+        #creating hash maps for 9 rows, columns and boxes
+        #note that this is a list of dictionaries initialised using a for-loop
+        rows = [{} for i in range(9)] 
+        cols = [{} for i in range(9)]
+        boxes = [{} for i in range(9)]
+        
+        for i in range(9):
+            for j in range(9):
+                num = board[i][j]
+                boxIndex = (i//3)*3 + j//3
+                #first we check if it is empty or not
+                if num!='.':
+                    num = int(num)
+                    
+                    rows[i][num]= rows[i].get(num,0)+1  
+                    cols[j][num] = cols[j].get(num,0)+1
+                    boxes[boxIndex][num] = boxes[boxIndex].get(num,0)+1
+                    #Got a key error here if the condition is placed outside the empty check. This is because you check for elements not present in the dictionary. ie: Before adding elements to the dictionary
+                    if (rows[i][num]>1 or cols[j][num]>1 or boxes[boxIndex][num]>1):
+                        return False
+        
+        
+        return True
