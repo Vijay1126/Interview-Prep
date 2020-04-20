@@ -1,0 +1,26 @@
+class Solution(object):
+    def isPalindrome(self, s):
+
+
+        left = 0
+        right = len(s)-1
+        while(left<=right):
+            
+            while (not s[left].isalnum()) and left<right:
+                left+=1
+            while (not s[right].isalnum()) and left<right:
+                right-=1
+                
+            if (s[left].lower()!=s[right].lower()) and left<right:
+                return False
+  
+            left+=1
+            right-=1
+            
+        return True
+    
+    
+    Points:
+    1. Another solution would be to reverse it and compare but this would take O(n) space complexity
+    2. Key things I've learnt here: 1. isalnum() to check if it is an alphabet or a number else False
+    3. .lower() converts it to lower and islower() checks if it is lower()
