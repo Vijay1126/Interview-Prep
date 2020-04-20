@@ -1,0 +1,20 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        bigdict = {}
+       
+        for i in s:
+            bigdict[i] = bigdict.get(i,0)+1
+        for i in t:
+            bigdict[i] = bigdict.get(i,0)-1
+        
+        for i in bigdict:
+            if bigdict[i]:
+                return False
+        return True
+            
+        
+ Points to Note:
+ 1. There are a few ways to do this, a) Sort both the arrays and see if they are equal.Keep in mind this is an anagram and
+ *not* a subset. So the same letters will be present just in a different order. 
+ 2. If we were to have unicode characters, the length of the sorted array could be huge, therefore the ideal thing 
+ to do here to do is to use a hash map, like I did
