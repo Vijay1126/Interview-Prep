@@ -1,0 +1,46 @@
+Hard to think of - Solution 
+Explanation can be found here : https://leetcode.com/problems/rotate-image/discuss/247174/Easy-Java-solution-with-explanation-processing-the-matrix-from-outer-to-inner
+
+The l determines how many time you have to go inside the matrix, 4 by 4 = 2, 3 by 3 it's 1 and so on
+At each l, we rotate the elements by 90 degreee
+
+class Solution {
+    public void rotate(int[][] matrix) {
+        int n = matrix.length;
+		// l is the side length of the matrix we are processing
+        for(int l = n; l > 1; l -= 2){
+		    // lo is the start index of the matrix we are processing
+            int lo = (n-l)/2;
+			// hi is the end index of the matrix we are processing
+            int hi = lo + l -1;
+            for(int i = 0; i < l-1; i++){
+			    // move number on one side to the other side clockwise
+                int temp = matrix[hi-i][lo];
+                matrix[hi-i][lo] = matrix[hi][hi-i];
+                matrix[hi][hi-i] = matrix[lo+i][hi];
+                matrix[lo+i][hi] = matrix[lo][lo+i];
+                matrix[lo][lo+i] = temp;
+            }
+        }
+        return;
+    }
+    
+}
+
+
+Solution I came up with,
+
+class Solution:
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        """
+        matrix.reverse()
+        for i in range(len(matrix)):
+            for j in range(i, len(matrix)):
+                matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
+            
+        
+        
+        return matrix
+    
