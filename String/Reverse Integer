@@ -1,0 +1,11 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        
+        ans = int(str(x)[::-1]) if x>0 else -1*int(str(-x)[::-1])
+        
+        return ans if ans<2**31-1 and ans>-2**31 else 0
+        
+        
+Points to Note:
+1. The new slice technique
+2. INT overflow means greater than 2^31
