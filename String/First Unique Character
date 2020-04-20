@@ -1,0 +1,20 @@
+from collections import Counter
+
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        dict = {}
+  
+        count = collections.Counter(s)
+        
+        for index, value in enumerate(s):
+            if(count[value]==1):
+                return index
+        
+        return -1
+       
+
+
+Points to Note:
+1. Think of when to import collections
+2. Order of how it is hashed does not matter, iterate through the original array/list/string and find the value in the dictionary 
+3. from collections import Counter 
