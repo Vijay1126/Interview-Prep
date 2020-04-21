@@ -1,0 +1,57 @@
+Two ways.
+1. 
+
+
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+     
+                for start in range(len(haystack)-len(needle)+1):
+                    print(haystack[start:start+len(needle)],needle)
+                    if haystack[start:start+len(needle)]==needle:
+                        return start
+                    
+                return -1
+                
+    The time complexity here i (N-L)timesL
+    A better soltution would be to stop when theres a mismatch and go for the next check
+
+2.
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:
+        #Solution using Backtracking
+        
+        if not needle.isalnum():
+            return 0
+        
+        nL = len(needle)      #needleLength
+        hL = len(haystack)  #haystackLength 
+        
+        iterator = 0
+        while(iterator<hL-nL+1):
+            
+            
+            while(iterator<hL-nL+1 and haystack[iterator]!=needle[0]):
+                iterator+=1
+            
+            if(iterator>=hL-nL+1):
+                return -1
+            
+            length = 0 #length of current substring
+            index = 0 #iterator for needle
+            print(iterator)
+            while (index<nL and haystack[iterator]==needle[index] and iterator<hL):
+                iterator+=1
+                length+=1
+                index+=1
+                
+            if(length == nL):
+                return iterator-length
+            
+            iterator = iterator-length+1
+
+        
+        return -1
+
+Points to Note:
+1. In a while check, the order matters.
+2. Start commenting like this
