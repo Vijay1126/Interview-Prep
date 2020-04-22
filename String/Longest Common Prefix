@@ -21,4 +21,26 @@ class Solution:
     
    Points to Note:
    1. startswith() and all
+   
+   
+   class Solution:
+    def longestCommonPrefix(self, strs):
+        if not strs:
+            return ""
+        
+        
+        #The trick used here is called unzipping
+        #Zipping: Take the first element of all of the arguments and iterate over it
+        smallest = min(strs, key= len)
+        for i , value in enumerate(zip(*strs)):
+            
+            if(len(set(value))>1):
+                return smallest[:i]
+            
+            
+            
+        return smallest
+        
+        
+        Points: Using Zip
         
