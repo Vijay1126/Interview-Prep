@@ -1,0 +1,22 @@
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        """
+        left = 0
+        right = n
+        
+        mid = int((left+right)/2)
+        
+        while(left<right):
+            if(isBadVersion(mid)):
+                right = mid
+            else:
+                left = mid+1
+            mid = int((left+right)/2)
+        
+        return left
+       
+Points to Note:
+1. Think of Binary search next time
