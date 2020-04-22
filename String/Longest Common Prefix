@@ -1,0 +1,24 @@
+class Solution:
+    def longestCommonPrefix(self, strs: List[str]) -> str:
+        #By using built in functions like startswith and all
+        
+        if strs is None or not strs:
+            return ""
+        longestCommonPrefix = ""
+        smallestStr = min(strs,key = len)
+        for i in range(len(smallestStr)):
+            
+            if all([x.startswith(smallestStr[:i+1]) for x in strs]):
+                longestCommonPrefix= smallestStr[:i+1]
+            else:
+                break
+        return longestCommonPrefix
+        
+        
+    
+    
+    
+    
+   Points to Note:
+   1. startswith() and all
+        
