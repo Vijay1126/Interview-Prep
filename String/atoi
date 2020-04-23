@@ -1,0 +1,33 @@
+class Solution:
+    def myAtoi(self, str: str) -> int:
+        
+        str = str.lstrip()
+        print(str)
+        max_value = 2**31-1
+        min_value = 2**31
+        if not str:
+            return 0
+        i = 0
+        sign = 0
+        if str[0]=="+":
+            sign = 1
+            i+=1
+        elif str[0]=="-":
+            sign = -1
+            i+=1
+        num = 0
+        
+        #+123@@@
+        for index in range(i,len(str)):
+            if str[index].isdigit():
+                num*=10
+                num+=int(str[index])
+                if(num>max_value):
+                    if sign!=0:
+                        return sign*(max_value) if sign==1 else sign*min_value
+                    else:
+                        return max_value
+            else:
+                break
+        return num*sign if sign!=0 else num
+        
