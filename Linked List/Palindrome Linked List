@@ -1,0 +1,31 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+
+        if head is None or head.next is None:
+            return True
+        self.first = head
+        
+        def reverseTraversal(head):
+            if head is None:
+                return True
+            elif(reverseTraversal(head.next)):
+                if (self.first.val!=head.val):
+                    return False
+                self.first = self.first.next
+                return True
+            else:
+                return False
+        first = head
+        return(reverseTraversal(head))
+        
+        
+        
+ Points to Note:
+ 1. Carefully note how the self is being used here. For a nested function there is no need for self. 
+ 2. Better solution with O(1) space complexity below
