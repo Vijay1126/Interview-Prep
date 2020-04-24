@@ -29,3 +29,63 @@ class Solution:
  Points to Note:
  1. Carefully note how the self is being used here. For a nested function there is no need for self. 
  2. Better solution with O(1) space complexity below
+ 
+ 
+ # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+
+        if head is None or head.next is None:
+            return True
+        
+        slow = head
+        fast = slow
+        #finding the start of the second half
+        while(fast.next is not None and fast.next.next is not None):
+            slow = slow.next
+            fast = fast.next.next
+            
+        secondStart = slow.next
+        
+        def reverse(secondStart):
+            first = secondStart
+            curr = first.next
+            first.next = None
+            
+            while(curr is not None):
+                temp = curr.next
+                curr.next = first
+                first = curr
+                curr = temp
+            secondStart = first
+            return secondStart
+        slow.next = reverse(secondStart)
+        
+        
+        start = head
+        secondStart = slow.next
+        while(secondStart is not None):
+            if start.val!=secondStart.val:
+                return False
+            secondStart = secondStart.next
+            start = start.next
+        
+        #returning original list
+        slow.next = reverse(slow.next)
+        print(head)
+        
+        return True
+        
+        
+        
+        
+
+        
+        
+       Points:
+       Reverse, check , reverse it back bro
