@@ -1,0 +1,33 @@
+from collections import deque
+class Solution:
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        output = []
+        levels = deque([root])
+        curr = 0
+        if root is None:
+            return output
+        
+  
+        while levels:
+            length = len(levels)
+            output.append([])
+            
+
+            for i in range(length):
+                node = levels.popleft()
+                output[curr].append(node.val)
+                if node.left:
+                    levels.append(node.left)
+                if(node.right):
+                    levels.append(node.right)
+            
+            curr+=1
+        
+        return output
+                
+Points:
+Deques much much faster for popping operations than list
