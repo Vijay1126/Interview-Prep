@@ -1,0 +1,25 @@
+Points:
+1. INORDER Traversal of a binary search tree will be the ascending order of the tree nodes
+2. You can't uniquely identify a tree with the inorder traversal list of the tree
+class Solution:
+    def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
+        
+        if nums is None or len(nums)==0:
+            return None
+        root = TreeNode(-1)
+        
+        
+        def helper(left, right):
+            if(left<=right):
+                mid  = int((left+right)/2)
+                root = TreeNode(nums[mid])
+                root.left = helper(left, mid-1)
+                root.right = helper(mid+1,right)
+                return root
+            
+            return None
+        
+        left = 0
+        right = len(nums)-1
+        
+        return helper( left,right)
