@@ -1,6 +1,19 @@
+
+
 Points:
 1. INORDER Traversal of a binary search tree will be the ascending order of the tree nodes
 2. You can't uniquely identify a tree with the inorder traversal list of the tree
+3. Here is the funny thing about BST. Inorder traversal is not a unique identifier of BST. 
+At the same time both preorder and postorder traversals are unique identifiers of BST.
+From these traversals one could restore the inorder one: inorder = sorted(postorder) = sorted(preorder), and inorder 
++ postorder or inorder + preorder are both unique identifiers of whatever binary tree.
+4. Note the above point only holds for BST.
+5. For binary, you need a combination of Inorder and pre/post
+
+
+
+
+So, the problem "sorted array -> BST" has multiple solutions.
 class Solution:
     def sortedArrayToBST(self, nums: List[int]) -> TreeNode:
         
