@@ -1,0 +1,18 @@
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        isPrime = [True]*n
+        
+        
+        i = 2
+        while(i**2<n):
+            if isPrime[i]:
+                j = i
+                while(j*i<n):
+                    isPrime[i*j]=False
+                    j+=1
+            i+=1
+        count = 0
+        for i in range(2,n):
+            if isPrime[i]:
+                count+=1
+        return count
