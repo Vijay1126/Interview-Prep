@@ -1,3 +1,9 @@
+Points:
+1. Divisibility check : Only have to check till n/2 cause minimum multiplier is 2
+2. Also cool method to find primes
+
+
+
 class Solution:
     def countPrimes(self, n: int) -> int:
         isPrime = [True]*n
