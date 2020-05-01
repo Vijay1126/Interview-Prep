@@ -1,0 +1,15 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        
+        missing = len(nums)
+        
+        sumActual = missing*(missing+1)/2
+
+        sumCalculated = 0
+        
+        for i in nums:
+            sumCalculated+= i
+
+        return int(sumActual-sumCalculated)
+            
+        
