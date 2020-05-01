@@ -1,0 +1,18 @@
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        push = 31
+        rev = 0
+        
+        for i in range(32): 
+            rev+=(n&1)<<push-i
+            print(rev)
+            n = n>>1
+        return rev
+    
+   
+  Points:
+  
+  To find out what the last element is : and it with 1 (n&1), similarly 11, 111 will yield the last bits.
+  
+  If you want to say, count the number of 1's in n , (n-1)&n will remove the last 1 present in n. By keeping a counter and 
+  checking if n exits, we can get the job done. 
