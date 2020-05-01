@@ -1,0 +1,24 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        
+        
+        stack = []
+        
+        mapping = {')':'(',']':'[','}':'{'}
+        
+        print(mapping)
+        
+        for char in s:
+            if char in mapping:
+                
+                if stack:
+                    topElement = stack.pop()
+                    if topElement!= mapping[char]:
+                        return False
+                else:
+                    return False
+                
+            else:
+                stack.append(char)
+                
+        return not stack
