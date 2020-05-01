@@ -1,0 +1,13 @@
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        
+        
+        xor = x^y
+        print(xor)
+        diff = 0
+        
+        while xor:
+            xor = xor & (xor-1)
+            diff+=1
+            print(bin(xor))
+        return diff
