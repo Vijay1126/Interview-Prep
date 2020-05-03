@@ -1,0 +1,26 @@
+from collections import Counter
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        
+        if len(magazine)<len(ransomNote):
+            return False
+        mag = Counter(magazine)
+        ransom = Counter(ransomNote)
+        print (mag)
+        print (ransom)
+        return all (mag[i]>=ransom[i] for i in ransom)
+    
+    **METHOD 2**
+    
+        ransom_Note = set(ransomNote)
+        
+        for letter in ransom_Note:
+            if ransomNote.count(letter)>magazine.count(letter):
+                return False
+        
+        return True
+    
+    
+        Points: 
+            1. Learn the use of Count. 
+            2. Counter and collections. Small for counter and capital for Counter
