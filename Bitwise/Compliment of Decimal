@@ -1,0 +1,18 @@
+class Solution:
+    def findComplement(self, num: int) -> int:
+        N = num
+        left = N
+        bit = 1
+        if N == 0:
+            return 1
+        
+        while left:
+            N= N^bit
+            bit = bit<<1
+            left = left>>1
+        
+        return N
+        
+        
+        
+ XOR with 1 gives the compliment of the number
