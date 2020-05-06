@@ -1,0 +1,28 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        #babad
+        #cbbd
+        maxLength = 0
+        start, end = 0,0
+        if s is None or len(s)<=0:
+            return ""
+        def expand(left, right):
+            while(left>=0 and right<len(s) and s[left]==s[right]):
+                left-=1
+                right+=1
+            return s[left+1:right]
+    
+        for i in range(len(s)):
+            l1 = expand(i, i)
+            if len(l1)>maxLength:
+                maxLength = len(l1)
+                biggestP = l1
+            l2 = expand(i, i+1)
+            if len(l2)>maxLength:
+                maxLength = len(l2)
+                biggestP = l2
+                
+        return biggestP
+        
+        
+  ##VERY GOOD QUESTION
