@@ -1,0 +1,17 @@
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        
+        left = 0
+        right = 0
+        hashmap = {}
+        maxLength = 0
+        start = 0
+        while(right<len(s)):
+            if s[right] in hashmap:
+                newIndex = hashmap[s[right]]+1
+                start = max(start,newIndex)
+                
+            length = right-start + 1
+            maxLength = max(length, maxLength)
+            hashmap[s[right]]= right
+            right+=1
