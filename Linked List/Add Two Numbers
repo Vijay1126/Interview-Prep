@@ -1,0 +1,74 @@
+Points: DIVMODDDDD!!USE DIVMOD
+
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+
+        res = tmp = ListNode(0)
+
+        add = 0
+        while l1 or l2 or add:
+        
+            sum = l1.val + add if l1 else add
+            sum += l2.val if l2 else 0
+
+            add, sum = divmod(sum, 10)
+            tmp.next = ListNode(sum)
+            
+            tmp = tmp.next
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        return res.next
+
+
+
+
+
+class Solution:
+    def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        sum = 18
+        carry = 0
+        output = ListNode()
+        start = output
+        i= 0
+        while (l1 is not None and l2 is not None):
+            print(i)
+            
+            sum=l1.val+l2.val+carry
+            if(sum//10 == 1):
+                carry = 1
+                sum%=10
+            else:
+                carry = 0
+            output.next = ListNode(sum)
+            output = output.next
+            l1 = l1.next
+            l2 = l2.next
+            i+=1
+            
+        if l2 is not None:
+            while l2 is not None:
+                sum = l2.val+carry
+                if(sum//10 == 1):
+                    carry = 1
+                    sum%=10
+                else:
+                    carry = 0
+                output.next = ListNode(sum)
+                l2 = l2.next
+                output = output.next
+        elif l1 is not None:
+            while l1 is not None:
+                sum = l1.val+carry
+                if(sum//10 == 1):
+                    carry = 1
+                    sum%=10
+                else:
+                    carry = 0
+                output.next = ListNode(sum)
+                l1 = l1.next
+                output = output.next
+                
+        if carry == 1:
+            output.next  = ListNode(1)
+        return(start.next)
