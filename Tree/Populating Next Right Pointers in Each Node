@@ -1,0 +1,30 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+from collections import deque
+class Solution:
+    def connect(self, root: 'Node') -> 'Node':
+        if root is None:
+            return None
+        leftMost = root
+        while leftMost.left is not None:
+            
+            node = leftMost
+            while(node is not None):
+    
+                node.left.next = node.right #Connection 1
+                if node.next:
+                    node.right.next = node.next.left
+                node = node.next
+            leftMost = leftMost.left
+        
+        return root
+                
+                
+            
