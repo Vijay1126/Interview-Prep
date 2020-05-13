@@ -1,0 +1,32 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+    def inorderSuccessor(self, root: 'TreeNode', p: 'TreeNode') -> 'TreeNode':
+        if p.right:
+            p = p.right
+            while p.left is not None:
+                p = p.left
+            return p
+        # Here all we do is traverse in order, and return the element before the needed element as inorder traversal takes care of the order
+        
+        stack, parent = [], 1000
+        
+        while stack or root:
+        
+            while root:
+                stack.append(root)
+                root = root.left
+
+            root = stack.pop()
+            if parent == p.val:
+                return root
+            parent = root.val
+
+            root = root.right
+        return None
+    
