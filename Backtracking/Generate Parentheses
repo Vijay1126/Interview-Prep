@@ -1,0 +1,17 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+        
+        output = []
+        def backtrack(currString,left,right,number):
+            if len(currString) == number*2:
+                output.append(currString)
+            
+            else:
+                if left<number:
+                    backtrack(currString+"(",left+1,right,number)
+                if right<left:
+                    backtrack(currString+")",left,right+1,number)
+                
+        backtrack("",0,0,n)
+        return output
+        
