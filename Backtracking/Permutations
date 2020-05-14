@@ -1,0 +1,16 @@
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        output = []
+        
+        
+        def back(first):
+            
+            if first == len(nums):
+                output.append(nums[:])
+            else:
+                for i in range(first,len(nums)):
+                    nums[first], nums[i] = nums[i], nums[first]
+                    back(first+1)
+                    nums[first], nums[i] = nums[i], nums[first]
+        back(0)
+        return output
