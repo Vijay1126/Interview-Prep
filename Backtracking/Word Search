@@ -1,0 +1,36 @@
+class Solution:
+    def exist(self, board: List[List[str]], word: str) -> bool:
+        
+        cols = len(board[0])
+        rows = len(board)
+        
+        def wordFinder(i,j,currStr):
+            if len(currStr) == 0:
+                return True
+            
+            if i<0 or j<0 or i==rows or j ==cols or board[i][j]!=currStr[0]:
+                return False
+            
+            board[i][j]="#"
+            found = False
+            for rowOffset, colOffset in [(0,1),(1,0),(-1,0),(0,-1)]:
+                found = wordFinder(i+rowOffset,j+colOffset,currStr[1:])
+                if found:
+                    break
+            board[i][j]=currStr[0]
+            
+            return found
+                
+            
+        
+        currStr = word
+        for i in range(rows):
+            for j in range(cols):
+                  if wordFinder(i,j,currStr):
+                        return True
+            
+        return False
+                    
+                    
+        
+                        
