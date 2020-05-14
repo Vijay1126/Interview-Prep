@@ -1,0 +1,39 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        
+        
+        output = []
+        
+        def back(curr, index):
+            if k == len(curr):
+                output.append(curr[:])
+            else:
+                for i in range(index, len(nums)):
+                    curr.append(nums[i])
+                    back(curr, i+1)
+                    curr.pop()
+   
+        for k in range(len(nums)+1):
+            back([],0)
+        return output
+        
+        
+        
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        
+        
+        output = []
+        
+        def back(curr, index):
+            output.append(curr[:])
+            for i in range(index, len(nums)):
+                curr.append(nums[i])
+                print(curr)
+                back(curr,i+1)
+                curr.pop()
+        
+        back([],0)
+        return output
+    
+    
