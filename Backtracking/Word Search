@@ -30,7 +30,13 @@ class Solution:
                         return True
             
         return False
-                    
+        
+        
+   The complexity will be 𝑂(m*n*4**𝑠) where m is the no. of rows and n is the no. of columns in the 2D matrix and s is the length of the input string.
+
+When we start searching from a character we have 4 choices of neighbors for the first character and subsequent characters have only 3 or less than 3 choices but we can take it as 4 (permissible slopiness in upper bound). This slopiness would be fine in large matrices. So for each character we have 4 choices. Total no. of characters are 𝑠 where s is the length of the input string. So one invocation of search function of your implementation would take 𝑂(4𝑠) time.
+
+Also in worst case the search is invoked for 𝑚∗𝑛 times. So an upper bound would be 𝑂(𝑚∗𝑛∗4𝑠).
                     
         
                         
