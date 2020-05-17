@@ -1,0 +1,32 @@
+y = [[2,2],[1,2],[7,4],[6,4],[5,0],[86,100],[55,100]]
+x = sorted(y, key = lambda y: y[1])
+
+i = 0
+# [[5, 0], [1, 2], [2, 2], [3, 4]]
+print("Original X" ,x)
+while i<len(x)-1:
+    currFreq = x[i][1]
+    nextFreq = x[i+1][1]
+    
+    if currFreq == nextFreq:
+        print("Enter")
+        print(currFreq, nextFreq)
+        startIndex = i
+
+        while(i<len(x)-1 and x[i][1]==x[i+1][1]):
+            i+=1
+
+        endIndex = i
+        print("Start: ",startIndex, "End: ",endIndex)
+        
+        sortedList = sorted(x[startIndex:endIndex+1], key = lambda x:x[0])
+        print("Sorted list",sortedList)
+        sortedIndex = 0
+        print(x)
+        for i in range(startIndex,endIndex+1):
+            print("Sorted Index: ",sortedIndex)
+            x[i]=sortedList[sortedIndex]
+            sortedIndex+=1
+        sortedList = []
+        print("Final X",x)
+    i+=1
