@@ -1,0 +1,46 @@
+from collections import Counter
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        lengthS = len(s)
+        lengthP = len(p)
+        counterP = Counter(p)
+        output = []
+        currCount = Counter()
+        for i in range(len(s)):
+            
+            currCount[s[i]] +=1
+            
+            if i>=lengthP:
+                if currCount[s[i-lengthP]] == 1:
+                    del currCount[s[i-lengthP]]
+                else:
+                    currCount[s[i-lengthP]]-=1
+            if currCount == counterP:
+                output.append(i-lengthP+1)
+                
+            
+        return output
+        
+        
+ from collections import Counter
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        lengthS = len(s)
+        lengthP = len(p)
+        arrayS = [0]*26
+        arrayP = [0]*26
+        output = []
+        for elements in p:
+            arrayP[ord(elements)-ord('a')]+=1
+        
+        for i in range(len(s)):
+            
+            arrayS[ord(s[i])-ord('a')]+=1
+            
+            if i>=lengthP:
+                arrayS[ord(s[i-lengthP])-ord('a')]-=1
+            
+            if arrayS == arrayP:
+                output.append(i-lengthP+1)
+                
+        return output
