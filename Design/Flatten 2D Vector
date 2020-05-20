@@ -1,0 +1,34 @@
+class Vector2D:
+
+    def __init__(self, v: List[List[int]]):
+        self.inner = 0
+        self.outer = 0
+        self.nums = v
+
+    def advanceToNext(self):
+        while self.outer<len(self.nums) and self.inner==(len(self.nums[self.outer])):
+                self.outer +=1
+                self.inner = 0
+        
+    def next(self) -> int:
+                                                      
+        self.advanceToNext()
+             
+        value = self.nums[self.outer][self.inner]
+        self.inner +=1
+        return value
+
+    def hasNext(self) -> bool:
+        self.advanceToNext()
+        return self.outer<len(self.nums)
+    
+    
+    
+                                        
+        
+
+
+# Your Vector2D object will be instantiated and called as such:
+# obj = Vector2D(v)
+# param_1 = obj.next()
+# param_2 = obj.hasNext()
