@@ -1,0 +1,23 @@
+class Solution:
+    def evalRPN(self, tokens: List[str]) -> int:
+        
+        
+        operations = {
+            "+" : lambda a,b : a+b,
+            "-" : lambda a,b : a-b,
+            "*" : lambda a,b : a*b,
+            "/" : lambda a,b : int(a/b)
+        }
+        i = 0
+        stack = []
+        while i< len(tokens):
+            if tokens[i] in operations:
+                second = int(stack.pop())  
+                first = int(stack.pop())
+                operation = operations[tokens[i]]
+                stack.append(operation(first,second))
+                i+=1
+            else:
+                stack.append(tokens[i])       
+                i+=1
+        return stack.pop()
