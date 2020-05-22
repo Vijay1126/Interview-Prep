@@ -9,3 +9,25 @@ class Solution:
             output.append(letters[0]*letters[1])
             
         return "".join(output)
+
+
+from collections import Counter
+class Solution:
+    def frequencySort(self, s: str) -> str:
+
+        if not s: return s
+        count = Counter(s)
+
+        output = []
+        
+        maxFreq = max(count.values())
+        bucket = [[] for _ in range(maxFreq+1)]
+        for letter, freq in count.items():
+            bucket[freq].append(letter)
+        print(bucket)
+        for i in range(len(bucket)-1,-1, -1):
+            for buck in bucket[i]:
+                output.append(buck*i)
+        
+            
+        return "".join(output)
