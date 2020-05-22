@@ -1,0 +1,11 @@
+from collections import Counter
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        count = Counter(s).most_common(len(s))
+        print(count)
+        output = []
+        for letters in count:
+            print(letters)
+            output.append(letters[0]*letters[1])
+            
+        return "".join(output)
