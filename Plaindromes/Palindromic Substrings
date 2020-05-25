@@ -1,0 +1,14 @@
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        length = len(s)
+        number = 0
+        i = 0
+        while i<length:
+            for a,b in [(i,i),(i,i+1)]:
+                while a>=0 and b<length and s[a]==s[b]:
+                    a-=1
+                    b+=1
+                number += (b-a)//2 #Here we're calculating the length because length 1 and 2 has 1 palindrome, 
+            i+=1                       #3 and 4 will have two palidromes and 5 nd 6 will have 3 and so on 
+        return number
+                
