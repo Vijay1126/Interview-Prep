@@ -1,0 +1,11 @@
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        #Mulitplication of small number with curr number can make it biggest or smallest depending on sign!!
+        
+        
+        minn, maxx = nums[0],nums[0]
+        result = nums[0]
+        for num in nums[1:]:
+            minn, maxx = min(num, num*minn, maxx*num), max(num, num*maxx, num*minn)
+            result = max(result,maxx)
+        return result
