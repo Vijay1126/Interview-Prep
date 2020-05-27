@@ -1,0 +1,33 @@
+class Solution:
+    def possibleBipartition(self, N: int, dislikes: List[List[int]]) -> bool:
+        
+        edges = []
+        
+        for _ in range(N+1):
+            edges.append([])
+        for a,b in dislikes:
+            edges[a].append(b)
+            edges[b].append(a)
+            
+            
+        seen = {}
+        for node in range(len(edges)):
+            if node not in seen:
+                if not self.dfs(edges,node,1,seen):
+                    return False
+            
+        return True
+        
+    def dfs(self,edges, node, colour, seen):
+        if node in seen:
+            return seen[node]==colour
+        seen[node]=colour
+            
+        #Check is all the neighbours are different colour
+        
+        vertices = edges[node]
+        for vertice in vertices:
+            if not self.dfs(edges, vertice, -colour, seen):
+                  return False
+        return True
+            
