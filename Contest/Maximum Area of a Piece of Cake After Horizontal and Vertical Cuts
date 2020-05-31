@@ -1,0 +1,25 @@
+class Solution:
+    def maxArea(self, h: int, w: int, horizontalCuts: List[int], verticalCuts: List[int]) -> int:
+        verticalCuts.sort()
+        horizontalCuts.sort()
+        
+        hi = horizontalCuts[0]
+        
+        for i in range(1,len(horizontalCuts)):
+            hi = max(hi, horizontalCuts[i]-horizontalCuts[i-1])
+        hi = max(hi, h-horizontalCuts[-1])
+        wi = verticalCuts[0]  
+        for i in range(1,len(verticalCuts)):
+            wi = max(wi, verticalCuts[i]-verticalCuts[i-1])
+        wi = max(wi, w-verticalCuts[-1])
+        return (hi*wi)%(10**9 + 7)
+        
+        
+        
+class Solution:
+    def maxArea(self, h: int, w: int, a: List[int], b: List[int]) -> int:
+        a.extend([0, h])
+        b.extend([0, w])
+        a.sort()
+        b.sort()
+        return max(a[i+1] - a[i] for i in range(len(a) - 1)) * max(b[i+1]-b[i] for i in range(len(b) - 1)) % 1000000007
