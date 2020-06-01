@@ -1,0 +1,32 @@
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        return " ".join(reversed(s.split()))
+        
+        
+ 
+class Solution:
+    def reverseWords(self, s: str) -> str:
+        
+        left = 0
+        right = len(s)-1
+        
+        while left<= right and s[left]== " ":
+            left +=1
+        
+        while left<= right and s[right] == " ":
+            right -=1
+            
+        result = deque([])
+        word = []
+        i = 0
+        while left<=right:
+            if s[left]== " " and word:
+                result.appendleft("".join(word))
+                word = []
+            elif s[left]!=" ":
+                word.append(s[left])   
+            left+=1
+            
+        result.appendleft(''.join(word))
+        
+        return " ".join(result)
