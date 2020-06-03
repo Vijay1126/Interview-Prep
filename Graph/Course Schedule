@@ -1,0 +1,43 @@
+class Solution:
+    def canFinish(self, numCourses: int, prerequisites: List[List[int]]) -> bool:
+        
+        
+        from collections import defaultdict
+    
+        relations = defaultdict(list)
+        
+        for relation in prerequisites:
+            nextCourse, prevCourse = relation[0],relation[1]
+            relations[prevCourse].append(nextCourse)
+            
+        checked = [False]*numCourses
+        visited = [False]*numCourses
+        
+        
+        for course in range(numCourses):
+            if self.cycleExists(course, relations, checked,visited):
+                return False
+        return True
+            
+            
+    
+    def cycleExists(self, course, relations, checked,visited):
+        
+        if checked[course]:
+            return False
+        
+        if visited[course]:
+            return True
+        
+        visited[course] = True
+        ret = False
+        for child in relations[course]:
+            
+            ret = self.cycleExists(child, relations, checked,visited)
+            if ret: break
+            
+        visited[course] = False
+        
+        checked[course] = True
+        return ret
+        

@@ -1,0 +1,21 @@
+class Solution:
+    def reverseWords(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        def mirror(string, left, right):
+            while(left<right):
+                string[left], string[right] = string[right], string[left]
+                left+=1
+                right-=1
+            return string
+        mirror(s, 0, len(s)-1)
+        
+        prev = 0
+        for i in range(len(s)):
+            
+            if s[i]==" ":
+                mirror(s, prev, i-1)
+                prev = i+1
+        mirror(s, prev, len(s)-1)
+        return string

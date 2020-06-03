@@ -1,0 +1,31 @@
+class Solution:
+    def checkIfPrerequisite(self, n: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        
+        from collections import defaultdict
+        
+        requirements = defaultdict(set)
+        
+        for a,b in prerequisites:
+            requirements[b].add(a)
+            
+        
+        answer = []
+        for prereq, course in queries:
+            if course not in requirements:
+                answer.append(False)
+            else:
+                answer.append(self.dfs(requirements,set(), course, prereq))
+            
+        return answer
+                
+    def dfs(self, requirements, visited, newSubject, target):
+        for node in requirements[newSubject]:
+            if node in visited:
+                continue
+            if node == target:
+                return True
+            visited.add(node)
+            if self.dfs(requirements, visited, node, target):
+                return True
+        return False
+        

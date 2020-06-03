@@ -1,0 +1,44 @@
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        
+        canGo = set()
+        canGo.add(0)
+        toChange = 0
+        for edge in connections:
+            A, B = edge[0], edge[1]
+            if B in canGo:
+                if A not in canGo:
+                    canGo.add(A)
+            elif A in canGo:
+                canGo.add(B)
+                toChange+=1
+        return toChange
+        
+        
+ class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        from collections import defaultdict
+        neigh = defaultdict(list)
+        edges = {(a, b) for a,b in connections}
+        visited = set()
+        
+        for c in connections:
+            u, v = c[0], c[1]
+            neigh[u].append(v)
+            neigh[v].append(u)
+
+        toChange = 0
+        def dfs(city):
+                nonlocal toChange
+                nonlocal visited
+                for n in neigh[city]:
+                    if n in visited:
+                        continue
+                    if (n,city) not in edges:
+                        toChange+=1
+                    visited.add(n)
+                    dfs(n)
+                
+        visited.add(0)
+        dfs(0)
+        return toChange

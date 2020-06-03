@@ -1,0 +1,42 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+class Solution:
+    
+    def __init__(self):
+        self.visited= {}
+    
+    def cloneNode(self, node):
+        if node is None:
+            return None
+        if node in self.visited:
+            return self.visited[node]
+        else:
+            clonedNode = Node(node.val, None, None)
+            self.visited[node] = clonedNode
+        return clonedNode
+    
+    def copyRandomList(self, head: 'Node') -> 'Node':
+        
+        if not head:
+            return head
+        givenNode = head
+        clonedNode = self.cloneNode(givenNode)
+        
+        
+        
+        while givenNode is not None:
+            
+            clonedNode.next = self.cloneNode(givenNode.next)
+            clonedNode.random = self.cloneNode(givenNode.random)
+            
+            givenNode = givenNode.next
+            clonedNode = clonedNode.next
+        
+        return self.visited[head]
+        

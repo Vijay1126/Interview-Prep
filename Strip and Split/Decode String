@@ -1,0 +1,38 @@
+class Solution:
+    def decodeString(self, s: str) -> str:
+        counts = []
+        words = []
+        currWord = ""
+        
+        
+        iterator = 0
+        while iterator<len(s):
+
+            if s[iterator].isdigit():
+                currDigit = ""
+                while s[iterator].isdigit():
+                    currDigit+=s[iterator]
+                    iterator+=1
+
+                counts.append(int(currDigit))
+                 
+            elif s[iterator] == '[':
+                words.append(currWord)
+                currWord = ""
+                iterator+=1
+            elif s[iterator] == ']':
+
+                stringToAdd = words.pop()
+
+                times = counts.pop()
+                currWord = "".join([stringToAdd,currWord*times])
+
+                iterator+=1
+                
+            else:
+                while s[iterator].isalpha():
+                    currWord = ''.join([currWord, s[iterator]])
+                    iterator+=1
+                
+                
+        return currWord

@@ -1,0 +1,11 @@
+class Solution:
+    def reorderLogFiles(self, logs: List[str]) -> List[str]:
+        return sorted(logs, key = self.sort)
+        #https://leetcode.com/problems/reorder-data-in-log-files/discuss/352878/Python3-Sort-the-list-use-key
+        
+    def sort(self, logs):
+        first, second = logs.split(' ',1)
+        if second[0].isalpha():
+            return (0,second, first)
+        else:
+            return (1, None, None)

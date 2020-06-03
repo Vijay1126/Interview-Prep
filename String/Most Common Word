@@ -1,0 +1,22 @@
+class Solution:
+    def mostCommonWord(self, paragraph: str, banned: List[str]) -> str:
+            from collections import Counter
+            words = set(banned)
+            
+            for c in "!?;:.,'":
+                paragraph = paragraph.replace(c," ")
+            
+            ans = []
+            for word in paragraph.split():
+                ans.append(word.lower())
+            count = Counter(ans)
+
+            ans, best = "", 0
+            for word in count:
+                if count[word]>best and word not in words:
+                    best = count[word]
+                    ans = word
+                
+            return ans
+                
+ 
