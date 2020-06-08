@@ -1,0 +1,21 @@
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        
+        if not S or len(S) == 0:
+            return None
+        index = [0 for i in range(26)]
+        for i in range(len(S)):
+            index[ord(S[i])-ord('a')] = i
+            
+        last = {c: i for i, c in enumerate(S)}
+        end = 0
+        output = [0]
+        prev = 0
+        
+        for i in range(len(S)):
+            end = max(end,index[ord(S[i])-ord('a')])
+            if end == i:
+                output.append(i-prev+1)
+                prev = i+1
+
+        return output[1:]
