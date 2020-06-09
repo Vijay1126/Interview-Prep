@@ -1,0 +1,13 @@
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        
+        tot,hare = nums[0],nums[0]
+        while True:
+            tot,hare = nums[tot],nums[nums[hare]]
+            if tot == hare:
+                tot = nums[0]
+                while tot!=hare:
+                    tot = nums[tot]
+                    hare = nums[hare]
+                return hare
+            
