@@ -1,0 +1,20 @@
+class Solution:
+    
+    def findLongestWord(self, s, d):
+        d.sort(key = lambda x: (-len(x),x))
+        print(d)
+        for word in d:
+            start = 0
+            for letter in s:
+                if start<len(word) and letter == word[start]:
+                    start+=1
+            if start == len(word):
+                return word
+        return ""
+    
+    def findLongestWord(self, s, d):
+            for word in sorted(d,key = lambda w : (-len(w),w)):
+                iterator = iter(s)
+                if all(c in iterator for c in word):
+                    return word
+            return ""
