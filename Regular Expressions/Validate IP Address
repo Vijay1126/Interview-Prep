@@ -1,0 +1,14 @@
+import re
+class Solution:
+    def validIPAddress(self, IP: str) -> str:
+        regV4 = r'((2[0-5][0-5])|(1[0-9][0-9])|([1-9][0-9])|([0-9]))'
+        regV4Check = re.compile(r'^('+regV4+r'\.){3}' + regV4 + r'$')
+        
+        regV6 = re.compile(r'^([0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$')
+
+        if regV4Check.match(IP):
+            return "IPv4"
+        elif regV6.match(IP):
+            return "IPv6"
+        else:
+            return "Neither"
