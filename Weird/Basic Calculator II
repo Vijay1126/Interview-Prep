@@ -1,0 +1,21 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        
+        stack, num = [], 0
+        si = '+'
+        for i in s+'+':
+            if i.isdigit():
+                num = num*10 + int(i)
+            elif i in '+-*/':
+                if si =='+':
+                    stack.append(num)
+                elif si=='-':
+                    stack.append(-num)
+                elif si=='*':
+                    stack.append(stack.pop()*num)
+                elif si=='/':
+                    stack.append(math.trunc(stack.pop()/num))
+                si = i
+                num = 0
+            
+        return sum(stack)
