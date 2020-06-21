@@ -1,0 +1,21 @@
+
+class Solution:
+    def getFolderNames(self, names: List[str]) -> List[str]:
+        seen = {}
+
+        for index, value in enumerate(names):
+
+            seen[value] = seen.get(value,0)+1
+            if seen[value]>1:
+                check = names[index]+ "("+ str(seen[value]-1) + ")"
+                count = seen[value]-1
+
+                while check in seen:
+                    check = names[index]+"("+str(count)+")"
+                    count+=1
+                names[index] = check
+                seen[check] = seen.get(check,0)+1
+                    
+        
+        return(names)
+                
