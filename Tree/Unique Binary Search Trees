@@ -1,0 +1,16 @@
+class Solution:
+    def numTrees(self, n: int) -> int:
+        dp = [0]*(n+1)
+        dp[0] = dp[1] = 1
+
+        def catalan(n):
+            if dp[n]!=0:
+                return dp[n]
+            else:
+                total = 0
+                for i in range(0,n):
+                    dp[n]+= catalan(i)*catalan(n-i-1)
+            return dp[n]
+
+        return catalan(n)
+            
