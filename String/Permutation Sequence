@@ -1,0 +1,18 @@
+class Solution:
+    def getPermutation(self, n: int, k: int) -> str:
+        blockSize = factorial(n-1)
+        termNumber = k-1
+        output = []
+        numbersLeft = list(range(1,n+1))
+        print(numbersLeft)
+        for i in range(n-1,0,-1):
+            index = termNumber//blockSize
+            output.append(str(numbersLeft[index]))
+            numbersLeft.pop(index)
+            termNumber %=blockSize
+            blockSize//=i
+        output.append(str(numbersLeft[0]))
+        return(''.join(output))
+            
+
+            

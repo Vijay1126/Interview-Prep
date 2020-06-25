@@ -1,0 +1,26 @@
+class Solution:
+
+    def __init__(self, w: List[int]):
+        self.cumArray = []
+        summ = 0
+        for weight in w:
+            summ+=weight
+            self.cumArray.append(summ)
+        self.sumOfElements = summ
+
+
+    def pickIndex(self) -> int:
+        target = self.sumOfElements*random.random()
+        left, right = 0, len(self.cumArray)-1
+
+        while left<right:
+            mid = (left+right)//2
+            if self.cumArray[mid]>target:
+                right = mid 
+            elif self.cumArray[mid]<=target:
+                left = mid+1
+        return left
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(w)
+# param_1 = obj.pickIndex()

@@ -1,0 +1,14 @@
+class Solution:
+    def longestWord(self, words: List[str]) -> str:
+        words.sort()
+        print(words)
+        
+        bigWord = ""
+        wordSet = set()
+        wordSet.add("")
+        for word in words:
+            if word[:-1] in wordSet:
+                if len(word)>len(bigWord):
+                    bigWord = word
+                wordSet.add(word)
+        return bigWord

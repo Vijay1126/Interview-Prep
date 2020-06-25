@@ -1,0 +1,37 @@
+class Solution:
+    def solveSudoku(self, board: List[List[str]]) -> None:
+        """
+        Do not return anything, modify board in-place instead.
+        """
+        
+        rows = [set() for i in range(9)]
+        cols = [set() for i in range(9)]
+        boxIndex = [set() for i in range(9)]
+        empty = []
+        for i in range(9):
+            for j in range(9):
+                if board[i][j] ==".":
+                    empty.append((i,j))
+                else:
+                    rows[i].add(board[i][j])
+                    cols[j].add(board[i][j])
+                    boxIndex[i//3*3+j//3].add(board[i][j])
+        
+        def backtrack(k):
+        
+            if k == len(empty):return True
+            i,j = empty[k]
+            for n in map(str, range(1,10)):
+                if n not in rows[i] and n not in cols[j] and n not in boxIndex[i//3*3+j//3]:
+                    board[i][j] = n
+                    rows[i].add(n)
+                    cols[j].add(n)
+                    boxIndex[i//3*3+j//3].add(n)
+                    if backtrack(k+1):return True
+                    else:
+                        rows[i].remove(n)
+                        cols[j].remove(n)
+                        boxIndex[i//3*3+j//3].remove(n)
+            return False
+        
+        backtrack(0)
