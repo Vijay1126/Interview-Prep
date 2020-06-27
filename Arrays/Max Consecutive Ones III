@@ -1,0 +1,16 @@
+class Solution:
+    def longestOnes(self, A: List[int], k: int) -> int:
+        
+        left = 0
+        
+        for right in range(len(A)):
+            
+            k-=1-A[right]
+            
+            if k<0:
+                k+=1-A[left]
+                left+=1
+                
+        return right-left+1
+                
+            
