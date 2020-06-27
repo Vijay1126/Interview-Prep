@@ -1,0 +1,12 @@
+class Solution:
+     def subarraySum(self, nums, k):
+        countDict = {0:1}
+        cumSum = 0
+        result = 0
+        
+        for num in nums:
+            cumSum+= num
+            result += countDict.get(cumSum-k,0)
+            
+            countDict[cumSum] = countDict.get(cumSum,0)+1
+        return result
