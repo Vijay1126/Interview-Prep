@@ -1,0 +1,14 @@
+class Solution:
+    def numSquares(self, n: int) -> int:
+        
+        i = 1
+        factors = []
+        while i**2<=n:
+            factors.append(i**2)
+            i+=1
+        dp = [float('inf')]*(n+1)
+        dp[0] = 0
+        for factor in factors:
+            for i in range(factor,len(dp)):
+                dp[i] = min(dp[i], 1+dp[i-factor])
+        return dp[-1] if dp[-1]!=float('inf') else -1
