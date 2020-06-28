@@ -1,0 +1,17 @@
+class Solution:
+    def canArrange(self, arr: List[int], k: int) -> bool:
+        
+        count = collections.defaultdict(int)
+        for i in arr:
+            count[i%k]+=1
+        for index in count:
+            if count[index] == count[(k-index)%k]:
+                if index == (k-index)%k:
+                    if count[index]%2==0:
+                        continue
+                    else:
+                        return False
+            else:
+                return False
+            
+        return True
