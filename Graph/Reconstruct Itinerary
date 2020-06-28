@@ -1,0 +1,19 @@
+class Solution:
+    def findItinerary(self, tickets: List[List[str]]) -> List[str]:
+        
+        tickets.sort(reverse = True)
+        
+        allTickets = collections.defaultdict(list)
+        
+        for ticket in tickets:
+            a , b = ticket[0], ticket[1]
+            allTickets[a].append(b)
+            
+        stack = ["JFK"]
+        output = []
+
+        while stack:
+            while allTickets[stack[-1]]:
+                stack.append(allTickets[stack[-1]].pop())
+            output.append(stack.pop())
+        return output[::-1]
