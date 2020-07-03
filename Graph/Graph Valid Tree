@@ -1,0 +1,30 @@
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        #DFS GRAPH
+        def adjacencyList(edges, adj):
+            for a,b in edges:
+                adj[a].append(b)
+                adj[b].append(a)
+        
+        
+        adj = collections.defaultdict(list)
+        adjacencyList(edges, adj)
+        
+        if len(edges)!=n-1:
+            return False
+        
+        visited = set()
+        def dfs(curr, parent):
+            visited.add(curr)
+            for neighbour in adj[curr]:
+                if neighbour not in visited:
+                    if dfs(neighbour,curr):
+                        return True
+                elif neighbour!=parent:
+                    return True
+        if dfs(0, -1):
+            return False
+        
+        return len(visited)==n
+        
+            
