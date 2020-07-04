@@ -1,0 +1,23 @@
+class Solution:
+    def prisonAfterNDays(self, cello: List[int], N: int) -> List[int]:
+
+        collec = []
+       
+        for i in range(N):
+            cells = [0 for i in range(len(cello))]
+            
+            for j in range(1,len(cello)-1):
+                before = cello[j-1]
+                after = cello[j+1]
+                if before==after:
+                    cells[j] = 1
+                else:
+                    cells[j] = 0
+
+            if cells in collec:
+                N = N%i
+                return collec[N-1]
+                
+            collec.append(cells)
+            cello = cells
+        return cello
