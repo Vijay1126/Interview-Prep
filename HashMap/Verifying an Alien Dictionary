@@ -1,0 +1,17 @@
+class Solution:
+    def isAlienSorted(self, words: List[str], order: str) -> bool:
+        dict = { value: index for index, value in enumerate(order)}
+        
+        for i in range(len(words)-1):
+            one = words[i]
+            two = words[i+1]
+            
+            commonLength = min(len(one),len(two))
+            for j in range(commonLength):
+                if dict[one[j]]>dict[two[j]]:
+                    return False
+                elif dict[one[j]]<dict[two[j]]:
+                    break
+                elif j == commonLength-1 and len(two)<len(one):
+                    return False
+        return True
