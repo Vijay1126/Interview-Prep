@@ -1,0 +1,27 @@
+class Solution:
+    def findOrder(self, numCourses: int, edges: List[List[int]]) -> List[int]:
+        
+        adjList = defaultdict(set)
+        inDegree = [0]*numCourses
+        
+        for a,b in edges:
+            adjList[b].add(a)
+            inDegree[a]+=1
+            
+        queue = deque([index for index, value in enumerate(inDegree) if value == 0])
+
+        output = []
+        
+        while queue:
+            curr = queue.popleft()
+            
+            output.append(curr)
+            
+            for i in adjList[curr]:
+                inDegree[i]-=1
+                if inDegree[i]==0:
+                    queue.append(i)
+            
+        return output if len(output)==numCourses else []
+                
+            
