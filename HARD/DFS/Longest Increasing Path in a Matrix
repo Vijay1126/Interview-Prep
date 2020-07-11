@@ -1,0 +1,38 @@
+class Solution:
+    def longestIncreasingPath(self, matrix: List[List[int]]) -> int:
+        
+        
+        if not matrix:
+            return 0
+        row = len(matrix)
+        col = len(matrix[0])
+        memory = [[0 for i in range(col) ]for j in range(row)]
+        checkRow = row-1
+        checkCol = col-1
+        ans = 0
+        print(memory)
+        def dfs(i,j):
+ 
+            if memory[i][j]!=0:
+                return memory[i][j]
+            count = 0
+            if i<checkRow and matrix[i+1][j]>matrix[i][j]:
+                count = max(count,dfs(i+1,j))
+            if i>0 and matrix[i-1][j]>matrix[i][j]:
+                count = max(count,dfs(i-1,j))
+            if j<checkCol and matrix[i][j+1]>matrix[i][j]:
+                count = max(count,dfs(i,j+1))
+            if j>0 and matrix[i][j-1]>matrix[i][j]:
+                count = max(count,dfs(i,j-1))
+            memory[i][j] = count+1
+            return count+1
+            
+            
+        
+        for i in range(row):
+            for j in range(col):
+                ans = max(ans,dfs(i,j))
+                
+        return ans
+            
+       
