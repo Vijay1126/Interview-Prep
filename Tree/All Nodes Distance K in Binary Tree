@@ -1,0 +1,37 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+from collections import deque
+class Solution:
+    def distanceK(self, root: TreeNode, target: TreeNode, K: int) -> List[int]:
+        
+        relation = defaultdict(list)
+        def dfs(parent, node):
+            
+            if parent and node:
+                relation[parent.val].append(node.val)
+                relation[node.val].append(parent.val)
+                
+            if node.right:
+                dfs(node,node.right)
+            if node.left:
+                dfs(node,node.left)
+        dfs(None,root)
+        
+        queue = [target.val]
+        seen = set([target.val])
+        
+        for i in range(K):
+            newLevel = []
+            for node in queue:
+                for nod in relation[node]:
+                    if nod not in seen:
+                        newLevel.append(nod)
+            queue = newLevel
+                        
+            seen |= set(queue)
+            
+        return queue
