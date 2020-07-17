@@ -1,0 +1,25 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def pathSum(self, root: TreeNode, sum: int) -> int:
+        count = 0
+        def helper(node,val,lookup):
+            nonlocal count
+            if not node:
+                return 
+            val +=node.val
+            if val==sum:
+                count+=1
+            count += lookup.get(val-sum,0)
+            lookup[val] = lookup.get(val,0)+1
+            if node.left:
+                helper(node.left, val, lookup)
+            if node.right:
+                helper(node.right, val , lookup)
+            lookup[val] = lookup.get(val)-1
+        helper(root, 0, {})
+        return count
