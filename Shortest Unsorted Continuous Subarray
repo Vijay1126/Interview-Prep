@@ -1,0 +1,12 @@
+class Solution:
+    def findUnsortedSubarray(self, nums: List[int]) -> int:
+        output = []
+        found = False
+        for index, value in enumerate(zip(nums,sorted(nums))):
+            a,b = value
+            if a!=b:
+                found = True
+                output.append(index)
+            
+            
+        return max(output)-min(output)+1 if found == True else 0
