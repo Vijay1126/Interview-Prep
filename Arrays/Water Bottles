@@ -1,0 +1,8 @@
+class Solution:
+    def numWaterBottles(self, numBottles: int, numExchange: int) -> int:
+        ans = a = numBottles
+        while a>0:
+            a,b = divmod(numBottles,numExchange)
+            ans+=a
+            numBottles = a+b
+        return ans
