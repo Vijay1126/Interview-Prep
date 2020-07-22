@@ -1,0 +1,26 @@
+class Solution:
+    def maximalRectangle(self, matrix: List[List[str]]) -> int:
+        
+        def helper(currArray):
+            area = 0
+            stack = [-1]
+            for i in range(len(currArray)):
+                
+                while stack[-1]!=-1 and currArray[i]<=currArray[stack[-1]]:                    
+                    area = max(area, currArray[stack.pop()]*(i-1-stack[-1]))
+                stack.append(i)
+            
+            while stack[-1]!=-1:
+                area = max(area, currArray[stack.pop()]*(len(dp)-stack[-1]-1))
+            return area
+        maxArea = 0
+        if not matrix:
+            return 0
+        dp = [0]*len(matrix[0])
+        for i in range(len(matrix)):
+            for j in range(len(matrix[0])):
+                dp[j]= dp[j] + 1 if matrix[i][j]=='1' else 0
+                
+            maxArea = max(helper(dp), maxArea)
+        
+        return maxArea
