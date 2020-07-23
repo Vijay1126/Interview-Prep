@@ -1,0 +1,14 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        twoNumbers = 0
+        for num in nums:
+            twoNumbers^=num
+        
+        diff = twoNumbers&(-twoNumbers)
+        a = 0
+        for num in nums:
+            
+            if diff&num:
+                a^=num
+                
+        return [a,twoNumbers^a]
