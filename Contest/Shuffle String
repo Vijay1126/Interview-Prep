@@ -1,0 +1,7 @@
+class Solution:
+    def restoreString(self, s: str, indices: List[int]) -> str:
+        output = ["*"]*len(indices)
+        
+        for index,letter in enumerate(s):
+            output[indices[index]] = letter
+        return "".join(output) 
