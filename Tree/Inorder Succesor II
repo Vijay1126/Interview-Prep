@@ -1,0 +1,18 @@
+class Solution:
+    def inorderSuccessor(self, node: 'Node') -> 'Node':
+        if node.right:
+                node = node.right
+                while node.left:
+                    node = node.left
+                return node
+        else:
+            prev = None
+            while node.parent:
+                prev = node
+                node = node.parent
+                
+                if node.left == prev:
+                    return node
+            return None
+                
+            
