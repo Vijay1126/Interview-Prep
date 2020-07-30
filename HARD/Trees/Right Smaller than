@@ -1,0 +1,37 @@
+def rightSmallerThan(array):
+    # Write your code here.
+    if len(array)==0:
+		return []
+	output = array[:]
+	lastIndex = len(array)-1
+	bst = SpecialBST(array[lastIndex])
+	output[lastIndex] = 0
+	for i in reversed(range(len(array)-1)):
+		bst.insert(array[i], i, output)
+	return output
+	
+class SpecialBST:
+	
+	def __init__(self, value):
+		self.value = value
+		self.left = None
+		self.right = None
+		self.leftSize = 0
+	
+	def insert(self, value, index, output, smallAtInsertTime = 0):
+		if value<self.value:
+			self.leftSize+=1
+			if self.left is None:
+				self.left = SpecialBST(value)
+				output[index] = smallAtInsertTime
+			else:
+				self.left.insert(value, index, output,smallAtInsertTime)
+		else:
+			smallAtInsertTime += self.leftSize
+			if value>self.value:
+				smallAtInsertTime += 1
+			if self.right is None:
+				self.right = SpecialBST(value)
+				output[index] = smallAtInsertTime
+			else:
+				self.right.insert(value, index, output,smallAtInsertTime)
