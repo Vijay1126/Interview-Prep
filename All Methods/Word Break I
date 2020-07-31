@@ -1,0 +1,84 @@
+Method 1:
+
+Brute Force:
+
+Here we check every prefix if it is present or not, if on eprefix is found, you start from the next end and keey going until the second part becomes nil. Then return True
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        wordDict = set(wordDict)
+        def helper(s, start):
+            if start == len(s):
+                return True
+            
+            else:
+                for end in range(start+1, len(s)+1):
+                    if s[start:end] in wordDict and helper(s, end):
+                        return True
+                return False
+        return helper(s, 0)
+    
+        
+Method 2:
+Brute force with memoization - Still TLE
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        wordDict = set(wordDict)
+        memo  = [False]*len(s)
+        def helper(s, start):
+            if start == len(s):
+                return True
+            if memo[start]:
+                return True
+            else:
+                for end in range(start+1, len(s)+1):
+                    if s[start:end] in wordDict and helper(s, end):
+                        memo[start] = True
+                        return memo[start]
+                return False
+        return helper(s, 0)
+    
+        
+
+
+
+
+Method 3:
+DFS/BFS Method
+
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        
+        queue = deque([s])
+        seen = set()
+        while queue:
+            currWord = queue.popleft()
+            
+            for word in wordDict:
+                if currWord.startswith(word):
+                    newWord = currWord[len(word):]
+                    if newWord == "":
+                        return True
+                    if newWord not in seen:
+                        seen.add(newWord)
+                        queue.append(newWord)
+        return False
+        
+        
+ Method 4:
+ 
+ Dynamic Programming
+ 
+ class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        dp = [0]*(len(s)+1)
+        dp[0] = 1
+        wordDict = set(wordDict)
+        
+        for i in range(len(s)):
+            for j in range(i,len(s)):
+                if dp[i]==1 and s[i:j+1] in wordDict:
+                    dp[j+1] = 1
+        
+        return dp[-1]==1
