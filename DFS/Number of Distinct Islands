@@ -1,0 +1,24 @@
+   def numDistinctIslands(self, grid: List[List[int]]) -> int:
+        seen = set()
+        
+        def dfs(grid,i,j,r0,c0):
+            if i<0 or i>=len(grid) or j<0 or j>=len(grid[0]) or (i,j) in seen or grid[i][j]==0:
+                return
+            seen.add((i,j))
+            shape.add((i-r0, j-c0))
+            
+            dfs(grid,i+1,j,r0,c0)
+            dfs(grid,i-1,j,r0,c0)
+            dfs(grid,i,j+1,r0,c0)
+            dfs(grid,i,j-1,r0,c0)
+        
+        shapes = set()
+        for i in range(0,len(grid)):
+            for j in range(0, len(grid[0])):
+                shape = set()
+                if grid[i][j]==1:
+                    dfs(grid,i,j,i,j)
+                if shape:
+                    shapes.add(frozenset(shape))
+        return len(shapes)            
+                
