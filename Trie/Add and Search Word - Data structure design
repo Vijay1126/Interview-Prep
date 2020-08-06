@@ -1,0 +1,43 @@
+class WordDictionary:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.words = {}
+        
+
+    def addWord(self, word: str) -> None:
+        """
+        Adds a word into the data structure.
+        """
+        start = self.words
+        for letter in word:
+            if letter not in start:
+                start[letter] = {}
+            start = start[letter]
+        start["*"] = True
+        
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the data structure. A word could contain the dot character '.' to represent any one letter.
+        """
+        
+        def searchNode(word, node):
+            for index, letter in enumerate(word):
+                if letter not in node:
+
+                    if letter == ".":
+                        for x in node:
+                            if x!='*' and searchNode(word[index+1:], node[x]):
+                                return True
+                    return False
+                else:
+                    node = node[letter]
+            return "*" in node               
+        
+        return searchNode(word, self.words)
+
+                
+                
