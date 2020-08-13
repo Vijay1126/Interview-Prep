@@ -1,0 +1,25 @@
+import collections
+def topologicalSort(jobs, deps):	
+	depends = collections.defaultdict(list)
+	inorder = { value:0 for index, value in enumerate(jobs)}
+	for i in deps:
+		a,b = i
+		depends[a].append(b)
+		inorder[b]+=1
+	queue = collections.deque([value for value in inorder if inorder[value]==0])
+	print(queue)
+	print(inorder, depends)
+	
+	output = []
+	
+	while queue:
+		curr = queue.popleft()
+		output.append(curr)
+		for node in depends[curr]:
+			inorder[node]-=1
+			if inorder[node]==0:
+				queue.append(node)
+	print(output,len(output))
+	return output if len(output)==len(jobs) else []
+			
+		
