@@ -1,0 +1,14 @@
+class Solution:
+    def combine(self, n: int, k: int) -> List[List[int]]:
+        output = []
+        word = [i+1 for i in range(n)]
+        def helper(curr, index, length):
+            if len(curr)==length:
+                output.append(curr[:])
+            else:
+                for i in range(index, len(word)):
+                    # print(curr,word[i])
+                    helper( curr+[word[i]], i+1, length)
+            return output
+        
+        return helper([], 0, k)
