@@ -1,0 +1,30 @@
+class Solution:
+    def circularArrayLoop(self, nums: List[int]) -> bool:
+  
+        def cycleExists(index, visited, direction, startIndex, length):
+            # print(visited, index, length)
+            if direction*nums[index]<0:
+                return False
+            elif visited[index]==True:
+                # print("Found",len(nums))
+                # print("Length", length, "Length of nums", len(nums)-1)
+                if length>1 and index == startIndex:
+                    return True
+                return  False
+            else:
+                visited[index] = True
+                return cycleExists((index+nums[index])%len(nums),visited ,direction , startIndex, length+1)
+                
+                
+            
+        for i in range(len(nums)):
+            print(nums[i])
+            visited = [False for i in range(len(nums))]
+            direction = 1 if nums[i]>0 else -1
+            if cycleExists(i,visited,direction,i,0):
+                return True
+    
+        return False
+    
+            
+            
