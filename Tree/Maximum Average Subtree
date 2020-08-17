@@ -1,0 +1,22 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maximumAverageSubtree(self, root: TreeNode) -> float:
+        output = float('-inf')
+        def helper(node):
+            nonlocal output
+            if node:
+                leftSum , leftNum = helper(node.left)
+                rightSum, rightNum = helper(node.right)
+                average = (currSum := leftSum+ node.val + rightSum)/(currNum := leftNum + 1 + rightNum)
+                
+                output = max(output, average)
+                return (currSum, currNum)
+            else:
+                return (0,0)
+        helper(root)
+        return output
