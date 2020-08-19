@@ -1,0 +1,22 @@
+class Solution:
+    def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        
+        stack = []
+        hm = defaultdict(int)
+        for i in reversed(range(len(nums2))):
+            if not stack:
+                hm[nums2[i]] = -1
+                
+            else:
+                while stack and stack[-1]<=nums2[i]:
+                    stack.pop()
+                if stack:
+                    hm[nums2[i]] = stack[-1]
+                else:
+                    hm[nums2[i]] = -1
+            stack.append(nums2[i])
+        output = []        
+        for num in nums1:
+            output.append(hm[num])
+        return output
+            
