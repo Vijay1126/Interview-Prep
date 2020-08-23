@@ -1,0 +1,13 @@
+class Solution:
+    def maxCoins(self, piles: List[int]) -> int:
+        piles.sort()
+
+
+        newPiles = deque(piles)
+    
+        output = 0
+        while newPiles:
+            newPiles.pop()
+            output += newPiles.pop()
+            newPiles.popleft()
+        return output
