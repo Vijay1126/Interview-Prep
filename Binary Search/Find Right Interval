@@ -1,0 +1,13 @@
+class Solution:
+    def findRightInterval(self, intervals: List[List[int]]) -> List[int]:
+        array = sorted([[value[0],index] for index, value in enumerate(intervals)],key = lambda x : x[0])
+        output = [-1]*len(intervals)
+        NewArray = [i[0] for i in array]
+        
+        for i in range(len(output)):
+            index = bisect_left(NewArray, intervals[i][1])
+            if index<len(output):
+                output[i] = array[index][1]
+        return output
+    
+ 
