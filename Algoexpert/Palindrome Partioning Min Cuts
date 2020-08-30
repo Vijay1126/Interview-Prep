@@ -1,0 +1,27 @@
+def palindromePartitioningMinCuts(string):
+    # Write your code here.
+	lookup = [[False for i in string] for j in string]
+	
+	for i in range(len(string)):
+		lookup[i][i] = True
+	
+	for length in range(2, len(string)+1):
+		for i in range(0, len(string)-length+1):
+			j = i+length-1
+			if length == 2:
+				lookup[i][j] = string[i]==string[j]
+			else:
+				lookup[i][j] = string[i]==string[j] and lookup[i+1][j-1]
+	
+	dp = [float("inf") for i in string]
+	
+	for i in range(len(string)):
+		if lookup[0][i]:
+			dp[i] = 0
+		else:
+			dp[i] = dp[i-1]+1
+			for j in range(1,i):
+				if lookup[j][i] and dp[j-1]+1<dp[i]:
+					dp[i] = dp[j-1]+1
+	return dp[-1]
+			
