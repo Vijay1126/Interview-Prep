@@ -1,0 +1,14 @@
+from itertools import permutations
+class Solution:
+    def largestTimeFromDigits(self, A: List[int]) -> str:
+        hour, minutes = -1, -1
+        for a,b,c,d in permutations(A):
+            if a*10+b>23 or c*10+d>59:
+                continue
+            if (a*10+b)*60+c*10+d>hour*60+minutes:
+                hour = a*10+b
+                minutes = c*10+d
+        if hour == -1:
+            return ""
+        output = ":".join([f'{hour:02}',f'{minutes:02}'])
+        return output
