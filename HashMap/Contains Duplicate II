@@ -1,0 +1,12 @@
+class Solution:
+    def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
+        map_ = OrderedDict()
+        
+        for index, i in enumerate(nums):
+            if i in map_ and index-map_[i]<=k:
+                return True
+            map_[i] = index
+            if index>k+1:
+                map_.popitem(False)
+
+        return False
