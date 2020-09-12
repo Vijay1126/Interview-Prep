@@ -1,0 +1,9 @@
+def minNumberOfJumps(array):
+	jumpsArray = [float("inf")]*(len(array))
+	jumpsArray[0] = 0
+	
+	for i in range(1, len(array)):
+		for j in range(0, i):
+			if array[j]+j>=i:
+				jumpsArray[i] = min(jumpsArray[j]+1, jumpsArray[i])
+	return jumpsArray[-1]
