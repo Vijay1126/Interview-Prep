@@ -1,0 +1,25 @@
+def maxSumIncreasingSubsequence(array):
+    sum = [num for num in array]
+	index = [None for num in array]
+	maxIndex = 0
+	for i in range(len(array)):
+		currNum = array[i]
+		for j in range(i):
+			prevNum = array[j]
+			if prevNum<currNum and sum[j]+currNum >= sum[i]:
+				sum[i] = sum[j] + currNum
+				index[i] = j
+		if sum[maxIndex]<sum[i]:
+			maxIndex = i
+	
+	return [sum[maxIndex], indexBuilder(index, array, maxIndex)]
+def indexBuilder(index, array, maxIndex):
+	output = []
+	while maxIndex is not None:
+		output.append(array[maxIndex])
+		maxIndex = index[maxIndex]
+	return list(reversed(output))
+		
+			
+				
+			
