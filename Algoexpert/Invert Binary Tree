@@ -1,0 +1,17 @@
+from collections import deque
+def invertBinaryTree(tree):
+	queue = deque([tree])
+	while queue:
+		node = queue.popleft()
+		node.left, node.right = node.right, node.left
+		if node.left:
+			queue.append(node.left)
+		if node.right:
+			queue.append(node.right)
+		
+	return node
+class BinaryTree:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
