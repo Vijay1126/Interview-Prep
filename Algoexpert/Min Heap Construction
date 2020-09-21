@@ -9,15 +9,33 @@ class MinHeap:
     def buildHeap(self, array):
         lastParentIndex = (len(array)-2)//2
 		for i in reversed(range(lastParentIndex+1)):
-			siftDown(array[i])
-    def siftDown(self):
+			self.siftDown(i, len(array)-1, array)
+		return array
+			
+    def siftDown(self, currIndex, endIndex, array):
         # Write your code here.
-        pass
-
+        leftChild = currIndex*2+1
+		while leftChild<=endIndex:
+			rightChild = currIndex*2+2 if currIndex*2+2<=endIndex else -1
+		
+			if rightChild!=-1 and array[rightChild] < array[leftChild]:
+				indexToSwap = rightChild
+			else:
+				indexToSwap = leftChild
+			print(indexToSwap, currIndex)
+			
+			if array[indexToSwap]<array[currIndex]:
+				self.swap(currIndex,indexToSwap,array)
+				currIndex = indexToSwap
+				leftChild = currIndex*2+1
+			else:
+				break
+				
+				
     def siftUp(self, currIndex, array):
 		currParent = (currIndex-1)//2
-		while currIndex>0 and self.heap[currParent]>self.heap[currIndex] :
-			self.swap(currParent, currIndex)
+		while currIndex>0 and array[currParent]>array[currIndex] :
+			self.swap(currParent, currIndex, array)
 			currIndex = currParent
 			currParent = (currIndex-1)//2
 			
@@ -26,11 +44,15 @@ class MinHeap:
         return self.heap[0]
 
     def remove(self):
-        swap[0, len(self.heap)-1, self.heap]
+        self.swap(0, len(self.heap)-1, self.heap)
 		valueToRemove = self.heap.pop()
-		siftDown(self.heap[0])
+		self.siftDown(0, len(self.heap)-1,self.heap)
 		return valueToRemove
 
     def insert(self, value):
         self.heap.append(value)
-		siftUp(value)
+		self.siftUp(len(self.heap)-1, self.heap)
+		
+	def swap(self, i, j, heap):
+		heap[i], heap[j] = heap[j], heap[i]
+		
