@@ -1,0 +1,31 @@
+def prisonBreak(n,m,h,v): 
+    horizontal = [0]*n
+    for i in h:
+        horizontal[i-1] = 1
+    maxHorizontal = 0
+    count = 0
+    for i in range(len(horizontal)):
+        if horizontal[i]==1:
+            if i>0 and horizontal[i-1]==1:
+                count +=1
+            else:
+                count += 2
+        else:
+            count = 0
+        maxHorizontal= max(maxHorizontal, count)
+    vertical = [0]*m
+    for i in v:
+        vertical[i-1] = 1
+    maxVertical = 0
+    count = 0
+    for i in range(len(vertical)):
+        if vertical[i]==1:
+            if i>0 and vertical[i-1]==1:
+                count +=1
+            else:
+                count += 2
+        else:
+            count = 0
+        maxVertical= max(maxVertical, count)
+    return (maxVertical*maxHorizontal)
+print(prisonBreak(3,2,[1,2,3],[1,2]))
