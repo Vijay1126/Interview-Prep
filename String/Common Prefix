@@ -1,0 +1,56 @@
+// "static void main" must be defined in a public class.
+public class Main {
+    public static void main(String[] args) {
+        String s = "aa";
+        int length = lengthOfCommonPrefix(s);
+        System.out.println(length);
+    }
+    
+    public static int lengthOfCommonPrefix(String input) {
+        int[] pattern = buildPattern(input);
+        System.out.println(Arrays.toString(pattern));
+        int sum = pattern.length;
+        for(int i=0;i<pattern.length;i++) {
+            if(pattern[i]==0) {
+                int length = 1;
+                int j = i;
+                while(j<pattern.length-1 && pattern[j]+1 == pattern[j+1]) {
+                    length++;
+                    j++;
+                }
+                if(j==pattern.length-1) {
+                    length++;
+                }
+                sum += length;
+            }
+        }
+        
+        return sum;
+    }
+    
+    public static int[] buildPattern(String s) {
+		
+		int[] pattern = new int[s.length()];
+		Arrays.fill(pattern, -1);
+		
+		int i = 1; 
+		int j = 0;
+		
+		while(i < s.length()) {
+		 	if(s.charAt(i) == s.charAt(j)) {
+				pattern[i] = j;
+				i++;
+				j++;
+			}
+			else if (j>0) {
+				j = pattern[j-1] + 1;
+			}
+			else {
+				i++;
+			}
+		}
+		
+		return pattern;
+	}
+	
+}
