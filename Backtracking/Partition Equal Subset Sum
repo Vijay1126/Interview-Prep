@@ -1,0 +1,18 @@
+class Solution:
+    def canPartition(self, nums: List[int]) -> bool:
+        
+        total = sum(nums)
+        memo = {}
+        return self.helper(0, total, nums,0, memo)
+    
+    def helper(self, index, total, nums, currSum, memo):
+        
+        if (index,currSum) in memo:
+            return memo[(index,currSum)] 
+        if currSum*2 == total:
+            return True
+        elif currSum*2>total or index>=len(nums):
+            return False
+        memo[(index,currSum)] = self.helper(index+1, total, nums, currSum, memo) or self.helper(index+1, total, nums, currSum+nums[index], memo)
+        return memo[(index,currSum)]
+            
