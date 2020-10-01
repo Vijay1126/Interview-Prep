@@ -1,0 +1,14 @@
+class Solution:
+    def lastStoneWeightII(self, stones: List[int]) -> int:
+        total = t = sum(stones)
+        total//=2
+        dp = [False for i in range(total+1)]
+        dp[0] = True
+        for num in stones:
+            for j in range(total, num-1, -1):
+              
+                dp[j] = dp[j] or dp[j-num]
+        for i in range(len(dp)-1,-1,-1):
+            if dp[i]:
+                return abs(i-(t-i))
+            
