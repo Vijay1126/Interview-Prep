@@ -1,0 +1,54 @@
+
+def create( matrix: List[List[int]]):
+    if not matrix: return
+    N, M, matrix = len(matrix), len(matrix[0]), matrix
+
+    dp = [[0 for _ in range(M)] for _ in range(N)]
+    dp[0][0] = matrix[0][0]   
+
+    for j in range(1, M):
+        dp[0][j] = matrix[0][j] + dp[0][j - 1]  # base case 1
+
+    for i in range(1, N):
+        dp[i][0] = matrix[i][0] + dp[i - 1][0]  # base case 2
+
+    for i in range(1, N):
+        for j in range(1, M):
+            dp[i][j] = matrix[i][j] + (dp[i - 1][j] + dp[i][j - 1] - dp[i - 1][j - 1] )
+    return dp
+
+def sumRegion( row1: int, col1: int, row2: int, col2: int, matrix) -> int:
+    if(not matrix):    return 0
+    if(len(matrix) == 1 and matrix[0] == 1): 
+        return matrix[0][0]
+
+    if row2>=len(matrix) or col2>=len(matrix):
+        return 0
+    result = dp[row2][col2]
+    
+    if(row1 > 0):               result -= dp[row1 - 1][col2]
+    if(col1 > 0):               result -= dp[row2][col1 - 1]
+    if(row1 > 0 and col1 > 0):  result += dp[row1 - 1][col1 - 1]
+    return  result
+                                               
+
+def subMatrix(row, col, maximumSum, dp):
+    output = (-1, 0)
+    for i in range(row):
+        for j in range(col):
+            
+            for k in range(1, row):
+                print("Hi",i,j,k)
+                currSum = sumRegion(i,j,i+k,j+k, dp)
+                print("The sum", currSum, k+1)
+                if currSum>maximumSum or currSum == 0:
+                    break
+                if currSum<=maximumSum and k+1>=output[1]:
+                    if currSum==27:
+                        print(k)
+                    output = (currSum,k+1)
+                print(currSum)
+            print("=====")
+    return output
+dp = create([[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4]])
+print("ANSWER",subMatrix(4,4,39,dp))
