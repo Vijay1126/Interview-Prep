@@ -1,0 +1,80 @@
+class Solution:
+    def maxKilledEnemies(self, grid: List[List[str]]) -> int:
+        if not grid or len(grid[0]) == 0:
+            return 0
+        emptyCells = []
+        enemyCol = defaultdict(int)
+        enemyRow = defaultdict(int)
+        wallRow = defaultdict(int)
+        wallCol = defaultdict(int)
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j] == "0":
+                    emptyCells.append((i,j))
+                if grid[i][j] == "E":
+                    enemyRow[i]+=1
+                    enemyCol[j]+=1
+                if grid[i][j] == "W":
+                    wallRow[i]+=1
+                    wallCol[j]+=1
+        def goRight(i,j, currSum):
+            toAdd = 0
+            if  j>=len(grid[0]) or  grid[i][j] == "W" :
+                return currSum
+            else:
+                if grid[i][j] == "E":
+                    toAdd = 1
+                return goRight(i, j+1, currSum+toAdd)
+            
+        def goLeft(i,j, currSum):
+            toAdd = 0
+            if j<0 or i<0:
+                return currSum
+            elif grid[i][j] == "W" :
+                return currSum
+            else:
+                if grid[i][j] == "E":
+                    print("Entred for left")
+                    toAdd = 1
+                return goLeft(i,j-1, currSum+toAdd)
+            
+        def goUp(i, j, currSum):
+            toAdd = 0
+            if i<0 or grid[i][j] == "W" :
+                return currSum
+            else:
+                if grid[i][j] == "E":
+                    toAdd = 1
+                return goUp(i-1,j, currSum+toAdd)
+        def goDown(i, j, currSum):
+            toAdd = 0
+            if i>=len(grid) or grid[i][j] == "W":
+                return currSum
+            else:
+                if grid[i][j] == "E":
+                    toAdd = 1
+                return goDown(i+1,j, currSum+toAdd)
+            
+        def helper(i, j):
+            # if i not in wallRow and j not in wallCol:
+            #     print("Entered ")
+            #     return enemyCol[j]+enemyRow[i]
+            # else:
+                up = goUp(i,j, 0) 
+                down = goDown(i,j, 0) 
+                left = goLeft(i,j, 0) 
+                right = goRight(i,j, 0) 
+                # print(i,j, up, down, left, right)
+                # print("------------")
+                return goUp(i,j, 0) + goDown(i,j,0) + goLeft(i,j,0) + goRight(i,j,0)
+                
+                        
+        output = 0
+        for cell in emptyCells:
+            row, col = cell
+            curr = helper(row, col)
+            # print("This ",row, col, curr)
+            
+            output = max(output, curr)
+            
+        return output
