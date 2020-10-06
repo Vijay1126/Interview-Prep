@@ -1,0 +1,22 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> List[str]:
+    
+        memo = defaultdict(list)
+        def helper(s ):
+            if s in memo:
+                return memo[s]
+            if not s:
+                return []
+            result = []
+            for word in wordDict:
+                if not s.startswith(word):
+                    continue
+                if word == s:
+                    result.append(word)
+                else:
+                    for nextWords in helper(s[len(word):]):
+                        result.append(word + " " + nextWords)
+                    
+            memo[s] = result
+            return memo[s]
+        return helper(s)
