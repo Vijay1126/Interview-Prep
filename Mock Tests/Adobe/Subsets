@@ -1,0 +1,13 @@
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        
+        output = []
+        def helper(curr, index):
+            nonlocal output
+            
+            output.append(curr)
+            
+            for i in range(index, len(nums)):
+                helper(curr+[nums[i]], i+1)
+            return output
+        return helper([],0)
