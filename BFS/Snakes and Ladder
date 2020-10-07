@@ -1,0 +1,40 @@
+class Solution:
+    def snakesAndLadders(self, board: List[List[int]]) -> int:
+        board.reverse()
+        mainArray = [0]
+        
+        for index, row in enumerate(board):
+            if index%2==0:
+                mainArray += row
+            else:
+                mainArray += row[::-1]
+        finalIndex = len(board)**2
+        
+        queue = [1]
+        moves = 0
+        visited = set()
+        while queue:
+            nextRound = []
+            while queue:
+                currIndex = queue.pop()
+                if currIndex == finalIndex:
+                    return moves
+                for i in range(1,7):
+                    newIndex = currIndex+i
+                    if newIndex<= finalIndex and newIndex not in visited:
+                        visited.add(newIndex)
+                        if mainArray[newIndex]!=-1:
+                            nextRound.append(mainArray[newIndex])
+                        else:
+                            nextRound.append(newIndex)
+                        
+            queue = nextRound
+            moves+=1
+        return -1
+        
+            
+                    
+                    
+                        
+                    
+                
