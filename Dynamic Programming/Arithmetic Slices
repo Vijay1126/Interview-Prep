@@ -1,0 +1,19 @@
+class Solution:
+    def numberOfArithmeticSlices(self, A) -> int:
+        """
+        Given an array of integers, this program uses dynamic
+        programming to determine the number of arithmetic slices
+        in the array.
+
+        :param A: array of integers
+        :type A: list[int]
+        :return: number of arithmetic slices
+        :rtype: int
+        """
+        
+        dp = [0]*len(A)
+        
+        for i in range(2, len(A)):
+            if A[i]-A[i-1] == A[i-1]-A[i-2]:
+                dp[i] = dp[i-1]+1
+        return sum(dp)
