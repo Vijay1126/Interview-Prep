@@ -1,0 +1,21 @@
+class Solution:
+    def arraysIntersection(self, arr1: List[int], arr2: List[int], arr3: List[int]) -> List[int]:
+        first, second, third = 0, 0 ,0
+        
+        output = []
+        while(first<len(arr1) and second<len(arr2) and third<len(arr3)):
+            if arr1[first] == arr2[second] == arr3[third]:
+                output.append(arr1[first])
+                first+=1
+                second+=1
+                third+=1
+            else:
+                currMax = max(arr1[first], arr2[second] , arr3[third])
+                if arr1[first]!=currMax:
+                    first+=1
+                if arr2[second]!=currMax:
+                    second+=1
+                if arr3[third]!=currMax:
+                    third+=1
+        return output
+                
