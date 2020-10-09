@@ -1,0 +1,23 @@
+class Solution:
+    def findCircleNum(self, M: List[List[int]]) -> int:
+        arr = list(range(len(M)))
+        # print(arr)
+        def find(a):
+            parent = arr[a]
+            if parent!= a:
+                parent = find(arr[a])
+            return parent
+        
+        def union(a,b):
+            arr[find(a)] = find(b)
+            
+        for i in range(len(M)):
+            for j in range(len(M[0])):
+                if M[i][j] == 1:
+                    if i!=j:
+                        union(i,j)
+                
+    
+        ans = [find(i) for i in arr]
+        return(len(set(ans)))
+                
