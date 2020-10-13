@@ -1,0 +1,34 @@
+class Solution:
+    def sufficientSubset(self, root: TreeNode, limit: int) -> TreeNode:
+        
+        
+        def helper(node, val, parent, child):
+            if node.left is None and node.right is None:
+                if val+node.val<limit:
+                    if child:
+                        parent.left = None
+                    else:
+                        parent.right = None
+                    return False
+                return True
+            left, right = False, False
+            if node.left:
+                left = helper(node.left, val + node.val, node, True)
+            if node.right:
+                right = helper(node.right, val + node.val, node, False)
+            if not left and not right:
+                if parent:
+                    if child:
+                        parent.left = None
+                    else:
+                        parent.right = None
+            else:
+                return True
+            
+
+        if not helper(root, 0, None, True):
+            if root.val>limit:
+                return root
+            else:
+                return None
+        return root
