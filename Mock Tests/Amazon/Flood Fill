@@ -1,0 +1,15 @@
+class Solution:
+    def floodFill(self, image: List[List[int]], sr: int, sc: int, newColor: int) -> List[List[int]]:
+        oldColour = image[sr][sc]
+        if oldColour == newColor:
+            return image
+        def helper(i, j):
+            if 0<=i<len(image) and 0<=j<len(image[0]) and image[i][j] == oldColour:
+                image[i][j] = newColor
+                helper(i+1,j)
+                helper(i,j+1)
+                helper(i-1,j)
+                helper(i,j-1)
+                return image 
+        return helper(sr,sc)
+        
