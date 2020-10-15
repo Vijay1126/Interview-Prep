@@ -1,0 +1,12 @@
+class Solution:
+    def confusingNumber(self, N: int) -> bool:
+        hashmap = {"0":"0", "1":"1", "6":"9", "8":"8", "9":"6"}
+        N = str(N)
+        newN = ""
+        for digit in reversed(N):
+            if digit not in hashmap:
+                return False
+            newN+=hashmap[digit]
+        print(newN)
+        return newN!=N
+            
