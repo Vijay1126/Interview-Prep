@@ -1,0 +1,19 @@
+class Solution:
+    def modifyString(self, s: str) -> str:
+        letters = [i for i in ascii_lowercase]
+        if len(s)==1 and s=="?":
+            return "a"
+        s = list(s)
+        
+        for i in range(len(s)):
+            print(s[i])
+            if s[i] =="?":
+                if i==0:
+                    arr = [j for j in letters if j!=s[i+1]]
+                elif 0<i<len(s)-1:
+                    arr = [j for j in letters if j!=s[i+1] and j!=s[i-1]  ]
+                else:
+                    arr = [j for j in letters if  j!=s[i-1] ]
+                    
+                s[i] = arr[0]
+        return "".join(s)
