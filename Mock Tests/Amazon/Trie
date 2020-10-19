@@ -1,0 +1,43 @@
+class Trie:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.start = {}
+        self.start["$"] = False
+
+    def insert(self, word: str) -> None:
+        """
+        Inserts a word into the trie.
+        """
+        start = self.start
+        for letter in word:
+            if letter not in start:
+                start[letter] = {}
+            start = start[letter]
+        start["$"] = True
+
+    def search(self, word: str) -> bool:
+        """
+        Returns if the word is in the trie.
+        """
+        start = self.start
+        for letter in word:
+            if letter not in start:
+                return False
+            else:
+                start = start[letter]
+        return "$" in start
+        
+
+    def startsWith(self, prefix: str) -> bool:
+        """
+        Returns if there is any word in the trie that starts with the given prefix.
+        """
+        start = self.start
+        for letter in prefix:
+            if letter not in start:
+                return False
+            start = start[letter]
+        return True
