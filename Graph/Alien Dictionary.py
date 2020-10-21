@@ -1,0 +1,30 @@
+class Solution:
+    def alienOrder(self, words: List[str]) -> str:
+
+        adjacentList = defaultdict(set)
+        inDegree = {c:0 for word in words for c in word}
+        
+        
+        for a,b in zip(words, words[1:]):
+            for c,d in zip(a,b):
+                if c!=d:
+                    
+                    adjacentList[c].add(d)
+                    if d not in adjacentList[c]:
+                        inDegree[d]+=1
+                    break
+            else:
+                if len(b)<len(a): return ""
+        print(adjacentList)
+        output = []
+        queue = deque([c for c in inDegree if inDegree[c]==0])
+    
+        while queue:
+            curr = queue.popleft()
+            output.append(curr)
+            for i in adjacentList[curr]:
+                inDegree[i]-=1
+                if inDegree[i]==0:
+                    queue.append(i)
+            
+        return "".join(output) if len(inDegree) == len(output) else ""
