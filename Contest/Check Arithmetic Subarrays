@@ -1,0 +1,13 @@
+class Solution:
+    def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+        output = []
+        for left, right in zip(l, r):
+            currArr = sorted(nums[left: right+1], reverse = True)
+            isSeq = True
+            for i in range(1, len(currArr)-1):
+                if currArr[i]-currArr[i-1] != currArr[i+1]-currArr[i]:
+                    isSeq = False
+                    break
+            output.append(isSeq)
+        return output
+            
