@@ -1,0 +1,10 @@
+class Solution:
+    def slowestKey(self, releaseTimes: List[int], keysPressed: str) -> str:
+        arr = [releaseTimes[i]-releaseTimes[i-1] for i in range(1, len(releaseTimes)) ]
+        arr = [releaseTimes[0]] + arr
+        maxCount = max(arr)
+        output = []
+        for i in range(len(arr)):
+            if arr[i] == maxCount:
+                output.append(keysPressed[i])
+        return sorted(output)[-1]
