@@ -1,0 +1,53 @@
+# Do not edit the class below except for the buildHeap,
+# siftDown, siftUp, peek, remove, and insert methods.
+# Feel free to add new properties and methods to the class.
+class MinHeap:
+    def __init__(self, array):
+        # Do not edit the line below.
+        self.heap = self.buildHeap(array)
+
+    def buildHeap(self, array):
+        lastParent = (len(array)-2)//2
+		for i in reversed(range(lastParent+1)):
+			self.siftDown(len(array), i, array)
+        return array
+
+    def siftDown(self, endIndex, currIndex, array):
+        leftChild = currIndex*2 + 1
+		while leftChild<endIndex:
+			rightChild = currIndex*2+2 if currIndex*2+2<endIndex else -1
+			if rightChild!=-1 and array[rightChild]<array[leftChild]:
+				swapIndex = rightChild
+			else:
+				swapIndex = leftChild
+			if array[swapIndex]<array[currIndex]:
+				self.swap(array, swapIndex, currIndex)
+				currIndex = swapIndex
+				leftChild = currIndex*2+1
+			else:
+				return 
+			
+	def swap(self, array, firstIndex, secondIndex):
+		array[firstIndex], array[secondIndex] = array[secondIndex], array[firstIndex]
+
+    def siftUp(self, heap, currIndex):
+		currParent = (currIndex-1)//2
+		while currIndex>0 and heap[currParent]>heap[currIndex]:
+			self.swap(heap, currParent, currIndex)
+			currIndex = currParent
+			currParent = (currIndex-1)//2
+        
+
+    def peek(self):
+        # Write your code here.
+        return self.heap[0]
+
+    def remove(self):
+        self.swap(self.heap, 0, len(self.heap)-1)
+		value = self.heap.pop()
+		self.siftDown(len(self.heap),0, self.heap)
+		return value
+    def insert(self, value):
+        self.heap.append(value)
+		self.siftUp(self.heap, len(self.heap)-1)
+		
