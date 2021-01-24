@@ -1,0 +1,22 @@
+class Solution:
+    def kthLargestValue(self, matrix: List[List[int]], k: int) -> int:
+        rows = len(matrix)
+        cols = len(matrix[0])
+        
+        heap = []
+        
+        for i in range(rows):
+            for j in range(cols): 
+                if i:
+                     matrix[i][j]^=matrix[i-1][j]
+                if j:
+                     matrix[i][j]^=matrix[i][j-1]
+                if i and j:
+                     matrix[i][j]^=matrix[i-1][j-1]
+                heapq.heappush(heap, matrix[i][j])
+                if len(heap)>k:
+                    heapq.heappop(heap)
+                
+        return heapq.heappop(heap)
+        
+      
